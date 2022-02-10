@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultra.net.nz/thymeleaf/layout">
+
+<head>
+
+	<title>AlunosApp</title>
+	<div th:replace="fragments/fragments :: headIncludes"></div>
+
+</head>
+
+<body>
+	<div th:replace="fragments/fragments :: header"></div>
+
+
+	<div class="container" style="margin-top: 20px;">
+
+
+
+		<span hidden id="emailUsuario" th:text="${session.usuarioLogado.email}"></span>
+
+		<a class="waves-effect waves-light btn" th:href=@{/cadastrarAluno}>Cadastrar aluno</a>
+		<a class="waves-effect waves-light btn" th:href=@{/listarAlunos}>Listar alunos</a>
+
+
+		<button data-target="modal1" class="btn modal-trigger">Pesquisar Aluno</button>
+		<a class="waves-effect waves-light btn" th:href=@{/logout}>Logout</a>
+		<!-- Modal Trigger -->
+
+		<!-- Modal Structure -->
+		<div id="modal1" class="modal">
+			<div class="modal-content">
+				<h4>Pesquisar Aluno</h4>
+
+
+
+				<form id="formPesquisarAluno" method="POST" action="/pesquisarAlunos" th:object="${aluno}">
+
+					<div class="row">
+						<div class="input-field col s8">
+							Nome:
+							<input type="text" th:field="*{nome}" />
+						</div>
+
+					</div>
+
+
+
+					<div class="row">
+						<button id="formPesquisarAlunoSubmitButton" type="submit"
+							class="waves-effect waves-light btn">Pesquisar</button>
+
+						<a type="button" class="modal-close waves-effect waves-light btn" href="#!">Fechar</a>
+
+					</div>
+
+
+					<div th:object="${alunosList}">
+						<div th:if="${alunosList}">
+							<table class="highlight">
+								<thead>
+									<th>Nome</th>
+									<th>Curso</th>
+									<th>Matricula</th>
+									<th>Turno</th>
+									<th>Status</th>
+									<th>Ações</th>
+								</thead>
+								<tbody>
+									<tr th:each="aluno : ${alunosList}">
+										<td><span th:text="${aluno.nome}"></span></a></td>
+										<td><span th:text="${aluno.curso}"></span></td>
+										<td><span th:text="${aluno.matricula}"></span></td>
+										<td><span th:text="${aluno.turno}"></span></td>
+										<td><span th:text="${aluno.status}"></span></td>
+										<td>
+											<a th:href="@{deletarAluno/{id}(id=${aluno.id})}"
+												class="waves-effect waves-light btn-small btn-floating"><i
+													class="material-icons left">delete</i></a>
+
+											<a th:href="@{alterarAluno/{id}(id=${aluno.id})}"
+												class="waves-effect waves-light btn-small btn-floating"><i
+													class="material-icons left">edit</i></a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+
+					</div>
+			</div>
+			<div class="modal-footer">
+				<a href="#!" class="modal-close waves-effect waves-green btn-flat">Fechar</a>
+			</div>
+		</div>
+
+
+	</div>
+
+
+
+
+	<div th:replace="fragments/fragments :: js"></div>
+</body>
+
+</html>
+
+
+
+<script>
+
+	$(document).ready(function () {
+		$('.modal').modal();
+
+
+		var emailUsuario = $("#emailUsuario").text();
+		
+
+		
+		var toastHTML = '<span>Bem vindo: ' + emailUsuario + '</span><button class="btn-flat toast-action" onclick="dismissToast();">Fechar</button>';
+		M.toast({html: toastHTML, displayLength: 6000});
+	});
+
+
+	function dismissToast(){
+		M.Toast.getInstance(document.querySelector(".toast")).dismiss();
+	}
+
+</script>
