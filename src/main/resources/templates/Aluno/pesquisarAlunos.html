@@ -20,12 +20,12 @@
 			<div class="row">
 				<div class="input-field col s8">
 					Nome:
-					<input th:field="*{nome}" type="text" />
+					<input type="text" value="" th:field="*{nome}" />
 				</div>
 				<div class="input-field col s4">
 
 					Selecione o status:
-					<select th:field="*{status}">
+					<select  th:field="*{status}">
 						<option th:each="status : ${T(com.alunoapp.Enums.Status).values()}" th:value="${status}"
 							th:text="${status}"></option>
 					</select>

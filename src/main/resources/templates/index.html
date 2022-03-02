@@ -17,14 +17,24 @@
 
 
 
-		<span hidden id="emailUsuario" th:text="${session.usuarioLogado.email}"></span>
+		<div>
+			<h1>Bem-vindo!</h1>
+			<p>Logado com e-mail: <span id="emailUsuario" th:text="${session.usuarioLogado.email}"></span></p>
+			
+			<br>
+			<h4>O que você gostaria de fazer?</h4>
+			
+		
+		</div>
+		
+		
 
 		<a class="waves-effect waves-light btn" th:href=@{/cadastrarAluno}>Cadastrar aluno</a>
 		<a class="waves-effect waves-light btn" th:href=@{/listarAlunos}>Listar alunos</a>
+		<!-- <a class="waves-effect waves-light btn" th:href=@{/pesquisarAlunos}>Pesquisar alunos</a>-->
 
 
-		<button data-target="modal1" class="btn modal-trigger">Pesquisar Aluno</button>
-		<a class="waves-effect waves-light btn" th:href=@{/logout}>Logout</a>
+		<!-- <button data-target="modal1" class="btn modal-trigger">Pesquisar Aluno</button> -->
 		<!-- Modal Trigger -->
 
 		<!-- Modal Structure -->
@@ -114,16 +124,13 @@
 		$('.modal').modal();
 
 
-		var emailUsuario = $("#emailUsuario").text();
-		
-
-		
-		var toastHTML = '<span>Bem vindo: ' + emailUsuario + '</span><button class="btn-flat toast-action" onclick="dismissToast();">Fechar</button>';
-		M.toast({html: toastHTML, displayLength: 6000});
+		// var emailUsuario = $("#emailUsuario").text();
+		// var toastHTML = '<span>Bem vindo: ' + emailUsuario + '</span><button class="btn-flat toast-action" onclick="dismissToast();">Fechar</button>';
+		// M.toast({html: toastHTML, displayLength: 6000});
 	});
 
 
-	function dismissToast(){
+	function dismissToast() {
 		M.Toast.getInstance(document.querySelector(".toast")).dismiss();
 	}
 

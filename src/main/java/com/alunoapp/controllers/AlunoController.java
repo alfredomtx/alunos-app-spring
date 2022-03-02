@@ -87,7 +87,7 @@ public class AlunoController {
 	@PostMapping(value = "/alterarAluno")
 	public String alterarAluno(Aluno aluno) {
 
-		System.out.println(aluno);
+		// System.out.println(aluno);
 		alunoRepository.save(aluno);
 		return "redirect:/listarAlunos";
 	}
@@ -116,15 +116,19 @@ public class AlunoController {
 
 		mv.setViewName("Aluno/pesquisarAlunos");
 		
-		String nome = aluno.getNome();
+		
+		String nome = null;
+		if (aluno != null) {
+			nome = aluno.getNome();
+		}
+		
 
 		System.out.println(nome);
 
 		// Status status = enum Status(statusAluno);
 
 		List<Aluno> alunosList;
-		
-		
+			
 
 		if (nome == null || nome.trim().isEmpty()) {
 			alunosList = alunoRepository.findAll();
@@ -133,9 +137,14 @@ public class AlunoController {
 		}
 
 		for (Aluno alunoL : alunosList) {
-			System.out.println(alunoL);
+			// System.out.println(alunoL);
 		}
 
+		System.out.println(aluno);
+		if (aluno == null)
+			mv.addObject("aluno", new Aluno());
+		else
+			mv.addObject("aluno", aluno);
 		mv.addObject("alunosList", alunosList);
 
 		return mv;

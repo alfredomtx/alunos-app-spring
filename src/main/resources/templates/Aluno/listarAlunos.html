@@ -13,7 +13,6 @@
 	<div th:replace="fragments/fragments :: header"></div>
 
 	<div class="container" style="margin-top: 20px;">
-
 		<a type="button" class="waves-effect waves-light btn" th:href="@{/}">Voltar</a>
 
 		<table class="highlight">
@@ -33,18 +32,17 @@
 					<td><span th:text="${aluno.turno}"></span></td>
 					<td><span th:text="${aluno.status}"></span></td>
 					<td>
-						<a th:href="@{deletarAluno/{id}(id=${aluno.id})}" class="waves-effect waves-light btn-small btn-floating"><i
+						<a th:href="@{deletarAluno/{id}(id=${aluno.id})}"
+							class="waves-effect waves-light btn-small btn-floating"><i
 								class="material-icons left">delete</i></a>
 
-						<a th:href="@{alterarAluno/{id}(id=${aluno.id})}" class="waves-effect waves-light btn-small btn-floating"><i
+						<a th:href="@{alterarAluno/{id}(id=${aluno.id})}"
+							class="waves-effect waves-light btn-small btn-floating"><i
 								class="material-icons left">edit</i></a>
 					</td>
 				</tr>
 			</tbody>
 		</table>
-
-
-
 	</div>
 
 

@@ -25,20 +25,35 @@ public class UsuarioController {
 
 	@Autowired
 	private UsuarioService usuarioService;
-
-	@RequestMapping(value = "/index")
-	public ModelAndView index() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("index");
-		mv.addObject("aluno", new Aluno());
-		return mv;
-	}
+	
+	@Autowired
+	private HttpSession session;
+	
 
 	@GetMapping("/")
 	public ModelAndView login() {
 		ModelAndView mv = new ModelAndView();
+		
+		if (session.getAttribute("usuarioLogado") != null) {
+			mv.setViewName("redirect:/index"); 
+			return mv;
+		}
+		
 		mv.setViewName("Login/login");
 		mv.addObject("usuario", new Usuario());
+		return mv;
+	}
+
+	@RequestMapping(value = "/index")
+	public ModelAndView index(HttpSession session) {
+		
+		ModelAndView mv = new ModelAndView();
+		if (session.getAttribute("usuarioLogado") == null) {
+			return login();
+		}
+		
+		mv.setViewName("index");
+		mv.addObject("aluno", new Aluno());
 		return mv;
 	}
 
@@ -68,7 +83,7 @@ public class UsuarioController {
 			return mv;
 		}
 		
-		mv.setViewName("redirect:/index");
+		mv.setViewName("redirect:/index"); 
 
 
 		session.setAttribute("usuarioLogado", userLogin);

@@ -11,7 +11,7 @@ import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 @Configuration
-@Profile("dev")
+@Profile("development")
 public class DatabaseConfiguration {
 
 	@Bean
@@ -19,9 +19,13 @@ public class DatabaseConfiguration {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		// dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/alunosapp?useTimezone=true&serverTimezone=UTC");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/alunosapp?useTimezone=true"
+				+ "&serverTimezone=UTC"
+				+ "&characterEncoding=utf-8"
+				+ "&createDatabaseIfNotExist=true");
 		dataSource.setUsername("root");
-		dataSource.setPassword("alfredo2468");
+		dataSource.setPassword(" root");
+		// dataSource.setPassword("#123oldbot123@-");
 		return dataSource;
 	}
 
