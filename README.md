@@ -11,3 +11,4 @@ Tecnologias utilizadas:
 - Maven
 - Thymeleaf
 - Materialize CSS
+- MySQL(local) & Postgresql (Heroku)
